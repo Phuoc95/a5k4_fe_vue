@@ -35,8 +35,13 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.home-page {
+  width: 100%;
+  min-height: 100vh;
+}
+
 .hero-section {
-  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  background: white;
   min-height: 100vh;
   display: flex;
   align-items: center;

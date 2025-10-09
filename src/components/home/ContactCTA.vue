@@ -20,7 +20,7 @@
               </div>
             </div>
             <p class="lead mb-0">
-              Hãy liên hệ với chúng tôi ngay hôm nay để được tư vấn miễn phí và biến ước mơ đám cưới của bạn thành hiện thực.
+              Hãy liên hệ với chúng tôi ngay hôm nay để được tư vấn miễn phí và biến ước mơ event của bạn thành hiện thực.
             </p>
           </div>
         </div>
@@ -32,12 +32,6 @@
             >
               <i class="fas fa-phone me-2"></i>Đặt Dịch Vụ Ngay
             </router-link>
-            <a
-              :href="`tel:${contactInfo.phone.replace(/[^0-9+]/g, '')}`"
-              class="btn btn-outline-light btn-lg mb-3"
-            >
-              <i class="fas fa-phone-alt me-2"></i>Gọi Ngay
-            </a>
           </div>
         </div>
       </div>

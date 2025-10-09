@@ -39,11 +39,11 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-color, #0d6efd);
+  background: var(--primary-color);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-color, #fd7e14);
+  background: var(--accent-color);
 }
 </style>

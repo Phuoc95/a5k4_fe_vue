@@ -10,7 +10,7 @@
 - **API Support**: Controllers hỗ trợ JSON response (`$request->wantsJson()`)
 
 ### Frontend (HTML/CSS/Bootstrap)
-- **Design**: Wedding Events - Dịch vụ tổ chức đám cưới
+- **Design**: Kohino Events - Dịch vụ tổ chức event
 - **Sections**: 
   - Header với navigation
   - Hero carousel (Bootstrap 5)
@@ -336,7 +336,7 @@ nuxt-frontend/
 
 **Stats Data:**
 - 10+ Năm kinh nghiệm
-- 1000+ Đám cưới tổ chức
+- 1000+ Event tổ chức
 - 50+ Dịch vụ chuyên nghiệp
 - 100% Khách hàng hài lòng
 

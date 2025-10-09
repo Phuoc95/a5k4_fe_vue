@@ -56,8 +56,8 @@ export const useThemeStore = defineStore('theme', () => {
 
   // Site information
   const siteInfo = ref<SiteInfo>({
-    siteName: 'Wedding Events',
-    siteSlogan: 'Dịch vụ cưới hỏi chuyên nghiệp',
+    siteName: 'Kohino Events',
+    siteSlogan: 'Dịch vụ event hỏi chuyên nghiệp',
     logo: '/images/logo.jpg',
     favicon: '/favicon.ico'
   })
@@ -65,8 +65,8 @@ export const useThemeStore = defineStore('theme', () => {
   // SEO information
   const seoInfo = ref<SeoInfo>({
     title: '',
-    metaDescription: 'Dịch vụ tổ chức đám cưới chuyên nghiệp với chất lượng cao và sáng tạo',
-    metaKeywords: 'dịch vụ cưới hỏi, tổ chức đám cưới, trang trí sân khấu, âm thanh ánh sáng',
+    metaDescription: 'Dịch vụ tổ chức event chuyên nghiệp với chất lượng cao và sáng tạo',
+    metaKeywords: 'dịch vụ event hỏi, tổ chức event, trang trí sân khấu, âm thanh ánh sáng',
     ogImage: '/images/logo.jpg',
     headerScripts: '',
     footerScripts: ''
@@ -75,7 +75,7 @@ export const useThemeStore = defineStore('theme', () => {
   // Contact information
   const contactInfo = ref<ContactInfo>({
     phone: '+84 123 456 789',
-    email: 'info@weddingevents.com',
+    email: 'info@kohinoevents.com',
     address: '123 Đường ABC, Quận 1, TP.HCM',
     workingHours: 'Thứ 2 - Thứ 7: 8:00 - 18:00',
     mapEmbed: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.325!2d106.6297!3d10.7769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f4b90b1c9c7%3A0x5c4a8c8c8c8c8c8c!2sHo%20Chi%20Minh%20City!5e0!3m2!1sen!2s!4v1234567890!5m2!1sen!2s" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
@@ -83,12 +83,12 @@ export const useThemeStore = defineStore('theme', () => {
 
   // Social links
   const socialLinks = ref<SocialLinks>({
-    facebook: 'https://facebook.com/weddingevents',
-    twitter: 'https://twitter.com/weddingevents',
-    linkedin: 'https://linkedin.com/company/weddingevents',
-    instagram: 'https://instagram.com/weddingevents',
-    youtube: 'https://youtube.com/weddingevents',
-    zalo: 'https://zalo.me/weddingevents'
+    facebook: 'https://facebook.com/kohinoevents',
+    twitter: 'https://twitter.com/kohinoevents',
+    linkedin: 'https://linkedin.com/company/kohinoevents',
+    instagram: 'https://instagram.com/kohinoevents',
+    youtube: 'https://youtube.com/kohinoevents',
+    zalo: 'https://zalo.me/kohinoevents'
   })
 
   // Computed properties
@@ -134,7 +134,7 @@ export const useThemeStore = defineStore('theme', () => {
   const loadThemeFromStorage = () => {
     if (typeof localStorage !== 'undefined') {
       try {
-        const stored = localStorage.getItem('wedding-events-theme')
+        const stored = localStorage.getItem('kohino-events-theme')
         if (stored) {
           const parsedTheme = JSON.parse(stored)
           theme.value = { ...theme.value, ...parsedTheme }
@@ -148,7 +148,7 @@ export const useThemeStore = defineStore('theme', () => {
   const saveThemeToStorage = () => {
     if (typeof localStorage !== 'undefined') {
       try {
-        localStorage.setItem('wedding-events-theme', JSON.stringify(theme.value))
+        localStorage.setItem('kohino-events-theme', JSON.stringify(theme.value))
       } catch (error) {
         console.warn('Failed to save theme to storage:', error)
       }

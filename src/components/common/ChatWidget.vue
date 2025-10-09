@@ -158,7 +158,7 @@ const getBotResponse = (userMessage: string): string => {
   const message = userMessage.toLowerCase()
   
   if (message.includes('dịch vụ') || message.includes('service')) {
-    return 'Chúng tôi cung cấp đầy đủ các dịch vụ cưới hỏi: tổ chức trọn gói, trang trí sân khấu, âm thanh ánh sáng, chụp ảnh quay phim. Bạn quan tâm đến dịch vụ nào?'
+    return 'Chúng tôi cung cấp đầy đủ các dịch vụ event hỏi: tổ chức trọn gói, trang trí sân khấu, âm thanh ánh sáng, chụp ảnh quay phim. Bạn quan tâm đến dịch vụ nào?'
   }
   
   if (message.includes('giá') || message.includes('price') || message.includes('cost')) {
@@ -166,7 +166,7 @@ const getBotResponse = (userMessage: string): string => {
   }
   
   if (message.includes('liên hệ') || message.includes('contact')) {
-    return 'Bạn có thể liên hệ với chúng tôi qua:\n📞 Hotline: 0123 456 789\n📧 Email: info@weddingevents.com\n📍 Địa chỉ: 123 Đường ABC, Quận 1, TP.HCM'
+    return 'Bạn có thể liên hệ với chúng tôi qua:\n📞 Hotline: 0123 456 789\n📧 Email: info@kohinoevents.com\n📍 Địa chỉ: 123 Đường ABC, Quận 1, TP.HCM'
   }
   
   if (message.includes('cảm ơn') || message.includes('thank')) {
@@ -209,7 +209,7 @@ onMounted(() => {
       if (!isOpen.value) {
         const welcomeMessage: ChatMessage = {
           id: messageId++,
-          text: 'Bạn có cần tư vấn về dịch vụ cưới hỏi không?',
+          text: 'Bạn có cần tư vấn về dịch vụ event hỏi không?',
           isUser: false,
           timestamp: new Date()
         }

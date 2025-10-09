@@ -12,7 +12,7 @@
         <div
           v-for="testimonial in testimonials"
           :key="testimonial.id"
-          class="col-md-6 col-lg-4"
+          class="col-6 col-sm-6 col-md-6 col-lg-3"
         >
           <div class="testimonial-card h-100">
             <div class="testimonial-content">
@@ -76,21 +76,21 @@ onMounted(async () => {
 const getDefaultTestimonials = (): Testimonial[] => [
   {
     id: 1,
-    content: 'Đám cưới của chúng tôi thật sự hoàn hảo nhờ Wedding Events. Đội ngũ chuyên nghiệp và tận tâm.',
+    content: 'Event của chúng tôi thật sự hoàn hảo nhờ Kohino Events. Đội ngũ chuyên nghiệp và tận tâm.',
     customerName: 'Nguyễn Thu Hằng',
     customerImage: '/images/customers/customer1.jpg',
     rating: 5
   },
   {
     id: 2,
-    content: 'Chúng tôi rất hài lòng với dịch vụ trang trí và ẩm thực của Wedding Events. Mọi thứ đều tuyệt vời!',
+    content: 'Chúng tôi rất hài lòng với dịch vụ trang trí và ẩm thực của Kohino Events. Mọi thứ đều tuyệt vời!',
     customerName: 'Trần Thanh Ngọc',
     customerImage: '/images/customers/customer2.jpg',
     rating: 5
   },
   {
     id: 3,
-    content: 'Dịch vụ âm thanh ánh sáng rất chuyên nghiệp. Cảm ơn Wedding Events đã giúp chúng tôi có một đám cưới đáng nhớ!',
+    content: 'Dịch vụ âm thanh ánh sáng rất chuyên nghiệp. Cảm ơn Kohino Events đã giúp chúng tôi có một event đáng nhớ!',
     customerName: 'Lê Minh Đức',
     customerImage: '/images/customers/customer3.jpg',
     rating: 5
@@ -113,11 +113,12 @@ const getDefaultTestimonials = (): Testimonial[] => [
 .testimonial-card {
   background: white;
   border-radius: 15px;
-  padding: 2rem;
+  padding: 1.5rem;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  height: 100%;
 }
 
 .testimonial-card::before {
@@ -142,17 +143,22 @@ const getDefaultTestimonials = (): Testimonial[] => [
 
 .quote-icon {
   color: var(--primary-color, #0d6efd);
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
   opacity: 0.3;
 }
 
 .testimonial-text {
   color: #555;
-  line-height: 1.7;
+  line-height: 1.6;
   font-style: italic;
   margin-bottom: 1.5rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  line-clamp: 4;
+  overflow: hidden;
 }
 
 .testimonial-author {
@@ -232,45 +238,54 @@ const getDefaultTestimonials = (): Testimonial[] => [
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .testimonial-card {
-    padding: 1.5rem;
+    padding: 1.25rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .testimonial-author {
     flex-direction: column;
     text-align: center;
     gap: 0.75rem;
   }
-  
+
   .author-avatar {
     width: 50px;
     height: 50px;
   }
-  
+
   .testimonial-text {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
   }
 }
 
 @media (max-width: 576px) {
   .testimonial-card {
-    padding: 1.25rem;
+    padding: 1rem;
   }
-  
+
   .quote-icon {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
-  
+
   .testimonial-text {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
-  
+
   .author-name {
     font-size: 0.9rem;
   }
-  
+
   .author-title {
     font-size: 0.8rem;
+  }
+
+  .author-avatar {
+    width: 45px;
+    height: 45px;
   }
 }
 </style>

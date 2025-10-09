@@ -6,9 +6,9 @@
           <div class="about-content">
             <h2 class="mb-4">Về Chúng Tôi</h2>
             <p class="lead mb-4">
-              Wedding Events là đơn vị chuyên tổ chức đám cưới hàng đầu tại TP.HCM. 
+              Kohino Events là đơn vị chuyên tổ chức event hàng đầu tại TP.HCM. 
               Với hơn 10 năm kinh nghiệm, chúng tôi đã giúp hàng nghìn cặp đôi có được 
-              ngày cưới đẹp mơ ước.
+              ngày vui đẹp mơ ước.
             </p>
             <ul class="features-list list-unstyled">
               <li class="mb-3">
@@ -42,7 +42,7 @@
               <div class="col-md-6">
                 <div class="stat-item text-center">
                   <h3 class="display-4 text-primary mb-2">1000+</h3>
-                  <p class="mb-0">Đám cưới tổ chức</p>
+                  <p class="mb-0">Event tổ chức</p>
                 </div>
               </div>
               <div class="col-md-6">

@@ -25,14 +25,13 @@
             :src="slide.imagePath"
             class="d-block w-100"
             :alt="slide.title"
-            style="height: 70vh; object-fit: cover;"
           />
           <div class="carousel-caption d-none d-md-block">
-            <h5 class="display-4 fw-bold mb-3">{{ slide.title }}</h5>
-            <p class="lead mb-4">{{ slide.description }}</p>
+            <h5>{{ slide.title }}</h5>
+            <p>{{ slide.description }}</p>
             <router-link
               to="/services"
-              class="btn btn-primary btn-lg px-4 py-2"
+              class="btn btn-primary"
             >
               Xem Chi Tiết
             </router-link>
@@ -45,7 +44,6 @@
         class="carousel-control-prev"
         type="button"
         @click="previousSlide"
-        style="top: 50% !important; transform: translateY(-50%);"
       >
         <i class="fas fa-arrow-left fa-2x"></i>
         <span class="visually-hidden">Previous</span>
@@ -54,11 +52,22 @@
         class="carousel-control-next"
         type="button"
         @click="nextSlide"
-        style="top: 50% !important; transform: translateY(-50%);"
       >
         <i class="fas fa-arrow-right fa-2x"></i>
         <span class="visually-hidden">Next</span>
       </button>
+    </div>
+
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+      <button
+        v-for="(slide, index) in slides"
+        :key="index"
+        type="button"
+        :class="{ active: currentSlide === index }"
+        @click="goToSlide(index)"
+        :aria-label="`Slide ${index + 1}`"
+      ></button>
     </div>
   </section>
 </template>
@@ -80,13 +89,19 @@ const homeStore = useHomeStore()
 // Get slides from store or use default
 const slides = ref<Slide[]>([])
 const currentSlide = ref(0)
-let autoSlideInterval: NodeJS.Timeout | null = null
+let autoSlideInterval: number | null = null
 
 onMounted(async () => {
-  // Load slides from store
+  // Load slides from store first
   await homeStore.loadSlides()
-  slides.value = homeStore.slides.length > 0 ? homeStore.slides : getDefaultSlides()
-  
+
+  // Use store slides if available, otherwise use default
+  if (homeStore.slides && homeStore.slides.length > 0) {
+    slides.value = homeStore.slides
+  } else {
+    slides.value = getDefaultSlides()
+  }
+
   // Start auto slide
   startAutoSlide()
 })
@@ -98,7 +113,7 @@ onUnmounted(() => {
 const getDefaultSlides = (): Slide[] => [
   {
     id: 1,
-    title: 'Tạo Nên Kỷ Niệm Đẹp Cho Ngày Cưới',
+    title: 'Tạo Nên Kỷ Niệm Đẹp Cho event',
     description: 'Dịch vụ tổ chức sự kiện trọn gói chuyên nghiệp',
     imagePath: '/images/slides/slide_1.jpg'
   },
@@ -136,14 +151,14 @@ const previousSlide = () => {
 
 const startAutoSlide = () => {
   if (typeof window !== 'undefined') {
-    autoSlideInterval = setInterval(() => {
+    autoSlideInterval = window.setInterval(() => {
       currentSlide.value = (currentSlide.value + 1) % slides.value.length
     }, 5000) // Change slide every 5 seconds
   }
 }
 
 const stopAutoSlide = () => {
-  if (autoSlideInterval) {
+  if (autoSlideInterval !== null) {
     clearInterval(autoSlideInterval)
     autoSlideInterval = null
   }
@@ -153,25 +168,48 @@ const stopAutoSlide = () => {
 <style scoped>
 .hero-section {
   position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #000;
 }
 
 .hero-carousel {
   position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  max-width: 98%;
+  margin: 0 auto;
 }
 
 .carousel-inner {
   position: relative;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .carousel-item {
-  position: relative;
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
   transition: opacity 0.6s ease-in-out;
 }
 
 .carousel-item.active {
-  display: block;
+  opacity: 1;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  /* Prevent image distortion */
+  min-height: 100%;
+  max-width: none;
 }
 
 .carousel-item::before {
@@ -181,7 +219,12 @@ const stopAutoSlide = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
   z-index: 1;
 }
 
@@ -193,12 +236,54 @@ const stopAutoSlide = () => {
   z-index: 2;
   text-align: center;
   color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  max-width: 90vw;
+  padding: 0 30px;
+  /* Prevent text wrapping */
+  white-space: nowrap;
+}
+
+.carousel-caption h5 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  /* Ensure text doesn't break */
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.carousel-caption p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  /* Allow wrapping for description */
+  white-space: normal;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.carousel-caption .btn {
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.carousel-caption .btn:hover {
+  border-color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .carousel-control-prev,
 .carousel-control-next {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 60px;
   height: 60px;
   background: rgba(0, 0, 0, 0.5);
@@ -209,6 +294,9 @@ const stopAutoSlide = () => {
   transition: all 0.3s ease;
   z-index: 3;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .carousel-control-prev:hover,
@@ -227,81 +315,166 @@ const stopAutoSlide = () => {
 
 .carousel-indicators {
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
   display: flex;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  /* Ensure proper centering */
+  width: auto;
+  margin: 0 auto;
 }
 
 .carousel-indicators button {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.6);
   transition: all 0.3s ease;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .carousel-indicators button.active {
-  background: white;
-  transform: scale(1.2);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: white;
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .carousel-indicators button:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.15);
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .carousel-item img {
-    height: 50vh !important;
-  }
-  
+@media (max-width: 1200px) {
   .carousel-caption h5 {
-    font-size: 2rem !important;
+    font-size: 3rem;
   }
-  
+
   .carousel-caption p {
-    font-size: 1rem !important;
+    font-size: 1.1rem;
+    max-width: 500px;
   }
-  
+
+  .carousel-indicators {
+    bottom: 35px;
+    gap: 10px;
+  }
+
+  .hero-carousel {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 80vh;
+  }
+
+  .hero-carousel {
+    height: 80vh;
+    max-width: 95%;
+  }
+
+  .carousel-item img {
+    height: 80vh;
+  }
+
+  .carousel-caption {
+    max-width: 95vw;
+    padding: 0 20px;
+  }
+
+  .carousel-caption h5 {
+    font-size: 2.5rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .carousel-caption p {
+    font-size: 1rem;
+    max-width: 400px;
+    white-space: normal;
+  }
+
   .carousel-control-prev,
   .carousel-control-next {
     width: 50px;
     height: 50px;
     font-size: 1.2rem;
   }
-  
+
   .carousel-control-prev {
     left: 15px;
   }
-  
+
   .carousel-control-next {
     right: 15px;
+  }
+
+  .carousel-indicators {
+    bottom: 25px;
+    gap: 8px;
+  }
+
+  .carousel-indicators button {
+    width: 12px;
+    height: 12px;
   }
 }
 
 @media (max-width: 576px) {
+  .hero-section {
+    min-height: 70vh;
+  }
+
+  .hero-carousel {
+    height: 70vh;
+    max-width: 100%;
+  }
+
+  .carousel-item img {
+    height: 70vh;
+  }
+
   .carousel-caption {
-    padding: 0 20px;
+    padding: 0 15px;
+    max-width: 100vw;
   }
-  
+
   .carousel-caption h5 {
-    font-size: 1.5rem !important;
-    margin-bottom: 1rem !important;
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
   }
-  
+
   .carousel-caption p {
-    font-size: 0.9rem !important;
-    margin-bottom: 1.5rem !important;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    max-width: 300px;
   }
-  
+
   .carousel-caption .btn {
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
+  }
+
+  .carousel-indicators {
+    bottom: 20px;
+    gap: 6px;
+  }
+
+  .carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-width: 1px;
   }
 }
 </style>

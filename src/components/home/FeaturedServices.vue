@@ -4,7 +4,7 @@
       <div class="row mb-5">
         <div class="col-12 text-center">
           <h2 class="mb-3">Dịch Vụ Nổi Bật</h2>
-          <p class="lead text-muted">Chúng tôi cung cấp đa dạng các dịch vụ tổ chức đám cưới chuyên nghiệp</p>
+          <p class="lead text-muted">Chúng tôi cung cấp đa dạng các dịch vụ tổ chức event chuyên nghiệp</p>
         </div>
       </div>
       

@@ -31,7 +31,7 @@ interface AboutData {
   features: string[]
   stats: {
     experience: string
-    weddings: string
+    kohinos: string
     services: string
     satisfaction: string
   }
@@ -59,13 +59,13 @@ export const useHomeStore = defineStore('home', () => {
       slides.value = [
         {
           id: 1,
-          title: 'Tạo Nên Kỷ Niệm Đẹp Cho Ngày Cưới',
+          title: 'Lưu giữ khoảnh khắc',
           description: 'Dịch vụ tổ chức sự kiện trọn gói chuyên nghiệp',
           imagePath: '/images/slides/slide_1.jpg'
         },
         {
           id: 2,
-          title: 'Trang Trí Sân Khấu Độc Đáo',
+          title: 'Không gian đặc sắc',
           description: 'Thiết kế sân khấu ấn tượng cho ngày trọng đại',
           imagePath: '/images/slides/slide_2.jpg'
         },
@@ -131,30 +131,30 @@ export const useHomeStore = defineStore('home', () => {
       testimonials.value = [
         {
           id: 1,
-          content: 'Đám cưới của chúng tôi thật sự hoàn hảo nhờ Wedding Events. Đội ngũ chuyên nghiệp và tận tâm.',
+          content: 'Event của chúng tôi thật sự hoàn hảo nhờ Kohino Events. Đội ngũ chuyên nghiệp và tận tâm.',
           customerName: 'Nguyễn Thu Hằng',
-          customerImage: '/images/customers/customer1.jpg',
+          customerImage: 'images/testimonials/testimonial_1.jpg',
           rating: 5
         },
         {
           id: 2,
-          content: 'Chúng tôi rất hài lòng với dịch vụ trang trí và ẩm thực của Wedding Events. Mọi thứ đều tuyệt vời!',
+          content: 'Chúng tôi rất hài lòng với dịch vụ trang trí và ẩm thực của Kohino Events. Mọi thứ đều tuyệt vời!',
           customerName: 'Trần Thanh Ngọc',
-          customerImage: '/images/customers/customer2.jpg',
+          customerImage: 'images/testimonials/testimonial_2.jpg',
           rating: 5
         },
         {
           id: 3,
-          content: 'Dịch vụ âm thanh ánh sáng rất chuyên nghiệp. Cảm ơn Wedding Events đã giúp chúng tôi có một đám cưới đáng nhớ!',
+          content: 'Dịch vụ âm thanh ánh sáng rất chuyên nghiệp. Cảm ơn Kohino Events đã giúp chúng tôi có một event đáng nhớ!',
           customerName: 'Lê Minh Đức',
-          customerImage: '/images/customers/customer3.jpg',
+          customerImage: 'images/testimonials/testimonial_3.jpg',
           rating: 5
         },
         {
           id: 4,
           content: 'Đội ngũ nhiếp ảnh gia rất tài năng, bắt trọn được những khoảnh khắc đẹp nhất của chúng tôi. Chất lượng hình ảnh vượt ngoài mong đợi!',
           customerName: 'Phạm Hương Giang',
-          customerImage: '/images/customers/customer4.jpg',
+          customerImage: 'images/testimonials/testimonial_4.jpg',
           rating: 5
         }
       ]
@@ -171,7 +171,7 @@ export const useHomeStore = defineStore('home', () => {
       // TODO: Replace with actual API call
       aboutData.value = {
         title: 'Về Chúng Tôi',
-        description: 'Wedding Events là đơn vị chuyên tổ chức đám cưới hàng đầu tại TP.HCM. Với hơn 10 năm kinh nghiệm, chúng tôi đã giúp hàng nghìn cặp đôi có được ngày cưới đẹp mơ ước.',
+        description: 'Kohino Events là đơn vị chuyên tổ chức event hàng đầu tại TP.HCM. Với hơn 10 năm kinh nghiệm, chúng tôi đã giúp hàng nghìn cặp đôi có được ngày vui đẹp mơ ước.',
         features: [
           'Đội ngũ chuyên nghiệp',
           'Dịch vụ trọn gói',
@@ -180,7 +180,7 @@ export const useHomeStore = defineStore('home', () => {
         ],
         stats: {
           experience: '10+',
-          weddings: '1000+',
+          kohinos: '1000+',
           services: '50+',
           satisfaction: '100%'
         }

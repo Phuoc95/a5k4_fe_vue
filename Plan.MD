@@ -1,7 +1,7 @@
 # Kế Hoạch Migration từ Blade Views sang Vue.js
 
 ## Tổng Quan
-Dự án migration từ Laravel Blade views (a5k4) sang Vue.js frontend (a5k4_fe/vue-frontend) cho website dịch vụ cưới hỏi.
+Dự án migration từ Laravel Blade views (a5k4) sang Vue.js frontend (a5k4_fe/vue-frontend) cho website dịch vụ event hỏi.
 
 ## Phân Tích Hiện Trạng
 

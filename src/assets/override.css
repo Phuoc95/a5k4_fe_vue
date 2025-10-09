@@ -1,73 +1,35 @@
 /* Override CSS to fix layout issues */
 
-/* Ensure full width */
+/* Ensure full width and prevent horizontal scroll */
 html, body {
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
 }
 
+/* Fix app container width */
 #app {
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* Ensure containers take full width */
+/* Fix Bootstrap containers - only when necessary */
 .container {
-  width: 100% !important;
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-  padding: 0 15px !important;
+  width: 100%;
+  max-width: 1200px;
 }
 
-.container-fluid {
-  width: 100% !important;
-  padding: 0 15px !important;
-}
-
-/* Fix Bootstrap grid */
-.row {
-  margin: 0 !important;
-  width: 100% !important;
-}
-
-.col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, 
-.col-7, .col-8, .col-9, .col-10, .col-11, .col-12,
-.col-sm, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6,
-.col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12,
-.col-md, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
-.col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,
-.col-lg, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6,
-.col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12,
-.col-xl, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6,
-.col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12 {
-  padding: 0 15px !important;
-}
-
-/* Fix navbar */
+/* Fix navbar width issues */
 .navbar {
-  width: 100% !important;
+  width: 100%;
 }
 
-/* Fix sections */
+/* Fix sections to be full width */
 section {
-  width: 100% !important;
-}
-
-/* Fix carousel */
-.carousel {
-  width: 100% !important;
-}
-
-.carousel-inner {
-  width: 100% !important;
-}
-
-.carousel-item {
-  width: 100% !important;
+  width: 100%;
 }
 
 /* Debug borders - remove after fixing */
