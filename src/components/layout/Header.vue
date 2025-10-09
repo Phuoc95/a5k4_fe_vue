@@ -1,66 +1,153 @@
 <template>
-  <header class="fixed-top bg-white shadow-sm">
-    <div class="container-fluid">
-      <nav class="navbar navbar-expand-lg navbar-light">
+  <header class="bg-white shadow-sm">
+    <!-- Top Bar -->
+    <div class="top-bar py-2 d-none d-lg-block" :style="{ backgroundColor: theme.primaryColor }">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="text-white">
+            <i class="far fa-clock me-2"></i> {{ contactInfo.workingHours }}
+          </div>
+          <div class="d-flex">
+            <div class="me-4">
+              <a
+                v-if="socialLinks.facebook"
+                :href="socialLinks.facebook"
+                target="_blank"
+                class="text-white me-3"
+                aria-label="Facebook"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                v-if="socialLinks.zalo"
+                :href="socialLinks.zalo"
+                target="_blank"
+                class="text-white me-3"
+                aria-label="Zalo"
+              >
+                <i class="fab fa-whatsapp"></i>
+              </a>
+              <a
+                v-if="socialLinks.youtube"
+                :href="socialLinks.youtube"
+                target="_blank"
+                class="text-white me-3"
+                aria-label="YouTube"
+              >
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+            <a
+              v-if="contactInfo.phone"
+              :href="`tel:${contactInfo.phone.replace(/[^0-9+]/g, '')}`"
+              class="text-white me-4"
+            >
+              <i class="fas fa-phone-alt me-2"></i> {{ contactInfo.phone }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container">
         <!-- Logo -->
         <router-link class="navbar-brand" to="/">
-          <img src="/images/logo.jpg" alt="Logo" height="48" />
+          <img
+            v-if="siteInfo.logo"
+            :src="siteInfo.logo"
+            :alt="siteInfo.siteName"
+            class="img-fluid"
+            style="max-height: 60px;"
+          />
+          <span v-else class="h4 mb-0 fw-bold text-primary">{{ siteInfo.siteName }}</span>
         </router-link>
-
-        <!-- Desktop Nav -->
-        <div class="navbar-nav d-none d-lg-flex">
-          <router-link
-            v-for="item in navItems"
-            :key="item.path"
-            :to="item.path"
-            class="nav-link"
-            :class="{ active: $route.path === item.path }"
-          >
-            {{ item.label }}
-          </router-link>
-        </div>
 
         <!-- Mobile Menu Button -->
         <button
-          class="navbar-toggler d-lg-none"
+          class="navbar-toggler"
           type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNavbar"
+          aria-controls="mainNavbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
           @click="toggleMobileMenu"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-      </nav>
 
-      <!-- Mobile Menu -->
-      <div v-if="isMobileMenuOpen" class="d-lg-none bg-white border-top">
-        <div class="container py-3">
-          <router-link
-            v-for="item in navItems"
-            :key="item.path"
-            :to="item.path"
-            class="d-block py-2 text-decoration-none"
-            @click="closeMobileMenu"
-          >
-            {{ item.label }}
-          </router-link>
+        <!-- Navigation Menu -->
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <router-link
+                to="/"
+                class="nav-link"
+                :class="{ 'active fw-bold': $route.path === '/' }"
+              >
+                Trang Chủ
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                to="/services"
+                class="nav-link"
+                :class="{ 'active fw-bold': $route.path.startsWith('/services') }"
+              >
+                Dịch Vụ
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                to="/gallery"
+                class="nav-link"
+                :class="{ 'active fw-bold': $route.path === '/gallery' }"
+              >
+                Thư Viện
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link
+                to="/contact"
+                class="nav-link"
+                :class="{ 'active fw-bold': $route.path === '/contact' }"
+              >
+                Liên Hệ
+              </router-link>
+            </li>
+          </ul>
+
+          <!-- Call Button -->
+          <div v-if="contactInfo.phone" class="d-flex ms-lg-4">
+            <a
+              :href="`tel:${contactInfo.phone.replace(/[^0-9+]/g, '')}`"
+              class="btn btn-primary rounded-pill px-4"
+              :style="{ backgroundColor: theme.primaryColor, borderColor: theme.primaryColor }"
+            >
+              <i class="fas fa-phone-alt me-2"></i> Gọi ngay
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
   </header>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useUIStore } from '@/stores/ui'
+import { useThemeStore } from '@/stores/theme'
 
 const uiStore = useUIStore()
+const themeStore = useThemeStore()
 
 const isMobileMenuOpen = computed(() => uiStore.isMobileMenuOpen)
-const navItems = [
-  { label: 'Trang Chủ', path: '/' },
-  { label: 'Dịch Vụ', path: '/services' },
-  { label: 'Thư Viện', path: '/gallery' },
-  { label: 'Liên Hệ', path: '/contact' }
-]
+const theme = computed(() => themeStore.theme)
+const siteInfo = computed(() => themeStore.siteInfo)
+const contactInfo = computed(() => themeStore.contactInfo)
+const socialLinks = computed(() => themeStore.socialLinks)
 
 const toggleMobileMenu = () => {
   uiStore.toggleMobileMenu()
