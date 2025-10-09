@@ -132,32 +132,38 @@ export const useThemeStore = defineStore('theme', () => {
   }
 
   const loadThemeFromStorage = () => {
-    try {
-      const stored = localStorage.getItem('wedding-events-theme')
-      if (stored) {
-        const parsedTheme = JSON.parse(stored)
-        theme.value = { ...theme.value, ...parsedTheme }
+    if (typeof localStorage !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('wedding-events-theme')
+        if (stored) {
+          const parsedTheme = JSON.parse(stored)
+          theme.value = { ...theme.value, ...parsedTheme }
+        }
+      } catch (error) {
+        console.warn('Failed to load theme from storage:', error)
       }
-    } catch (error) {
-      console.warn('Failed to load theme from storage:', error)
     }
   }
 
   const saveThemeToStorage = () => {
-    try {
-      localStorage.setItem('wedding-events-theme', JSON.stringify(theme.value))
-    } catch (error) {
-      console.warn('Failed to save theme to storage:', error)
+    if (typeof localStorage !== 'undefined') {
+      try {
+        localStorage.setItem('wedding-events-theme', JSON.stringify(theme.value))
+      } catch (error) {
+        console.warn('Failed to save theme to storage:', error)
+      }
     }
   }
 
   const updateCSSVariables = () => {
-    const root = document.documentElement
-    root.style.setProperty('--primary-color', theme.value.primaryColor)
-    root.style.setProperty('--secondary-color', theme.value.secondaryColor)
-    root.style.setProperty('--accent-color', theme.value.accentColor)
-    root.style.setProperty('--text-color', theme.value.textColor)
-    root.style.setProperty('--background-color', theme.value.backgroundColor)
+    if (typeof document !== 'undefined') {
+      const root = document.documentElement
+      root.style.setProperty('--primary-color', theme.value.primaryColor)
+      root.style.setProperty('--secondary-color', theme.value.secondaryColor)
+      root.style.setProperty('--accent-color', theme.value.accentColor)
+      root.style.setProperty('--text-color', theme.value.textColor)
+      root.style.setProperty('--background-color', theme.value.backgroundColor)
+    }
   }
 
   const hexToRgb = (hex: string): string => {

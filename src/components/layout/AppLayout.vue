@@ -66,7 +66,7 @@ useHead({
     },
     {
       property: 'og:url',
-      content: computed(() => window.location.href)
+      content: computed(() => '')
     },
     {
       property: 'og:title',
@@ -84,7 +84,7 @@ useHead({
   link: [
     {
       rel: 'canonical',
-      href: computed(() => window.location.href)
+      href: computed(() => '')
     },
     {
       rel: 'icon',
@@ -123,10 +123,10 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: siteInfo.value.siteName || '',
-        url: window.location.origin,
+        url: '',
         potentialAction: {
           '@type': 'SearchAction',
-          target: `${window.location.origin}/search?q={search_term_string}`,
+          target: `/search?q={search_term_string}`,
           'query-input': 'required name=search_term_string'
         }
       }))
@@ -137,7 +137,7 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: siteInfo.value.siteName || '',
-        url: window.location.origin,
+        url: '',
         logo: siteInfo.value.logo || '/images/logo.jpg',
         sameAs: Object.values(themeStore.socialLinks).filter(link => link)
       }))
@@ -150,12 +150,14 @@ onMounted(() => {
   themeStore.initializeTheme()
   
   // Setup CSRF token for AJAX requests
-  const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
-  if (csrfToken) {
-    // Set up axios defaults
-    import('axios').then(axios => {
-      axios.default.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
-    })
+  if (typeof document !== 'undefined') {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
+    if (csrfToken) {
+      // Set up axios defaults
+      import('axios').then(axios => {
+        axios.default.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
+      })
+    }
   }
 })
 </script>
@@ -163,14 +165,18 @@ onMounted(() => {
 <style scoped>
 .app-layout {
   font-family: 'Montserrat', sans-serif;
-  color: v-bind('theme.textColor');
-  background-color: v-bind('theme.backgroundColor');
+  color: var(--text-color, #212529);
+  background-color: var(--background-color, #ffffff);
+  width: 100%;
+  min-height: 100vh;
 }
 
 :root {
-  --primary-color: v-bind('theme.primaryColor');
-  --secondary-color: v-bind('theme.secondaryColor');
-  --accent-color: v-bind('theme.accentColor');
+  --primary-color: #0d6efd;
+  --secondary-color: #6c757d;
+  --accent-color: #fd7e14;
+  --text-color: #212529;
+  --background-color: #ffffff;
 }
 
 .btn-primary {

@@ -18,25 +18,33 @@ const isVisible = ref(false)
 const scrollThreshold = 300
 
 const handleScroll = () => {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-  isVisible.value = scrollTop > scrollThreshold
+  if (typeof window !== 'undefined') {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    isVisible.value = scrollTop > scrollThreshold
+  }
 }
 
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  })
+  if (typeof window !== 'undefined') {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-  // Initial check
-  handleScroll()
+  if (typeof window !== 'undefined') {
+    window.addEventListener('scroll', handleScroll)
+    // Initial check
+    handleScroll()
+  }
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('scroll', handleScroll)
+  }
 })
 </script>
 

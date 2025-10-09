@@ -1,5 +1,5 @@
 <template>
-  <section class="contact-cta py-5" :style="{ backgroundColor: theme.primaryColor }">
+  <section class="contact-cta py-5">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-8">
@@ -57,7 +57,7 @@ const contactInfo = computed(() => themeStore.contactInfo)
 
 <style scoped>
 .contact-cta {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  background: linear-gradient(135deg, var(--primary-color, #0d6efd) 0%, var(--accent-color, #fd7e14) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -114,7 +114,7 @@ const contactInfo = computed(() => themeStore.contactInfo)
 
 .btn-light {
   background: white;
-  color: var(--primary-color);
+  color: var(--primary-color, #0d6efd);
   border-color: white;
 }
 
@@ -134,7 +134,7 @@ const contactInfo = computed(() => themeStore.contactInfo)
 
 .btn-outline-light:hover {
   background: white;
-  color: var(--primary-color);
+  color: var(--primary-color, #0d6efd);
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }

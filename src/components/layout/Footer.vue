@@ -178,7 +178,12 @@ const siteInfo = computed(() => themeStore.siteInfo)
 const contactInfo = computed(() => themeStore.contactInfo)
 const socialLinks = computed(() => themeStore.socialLinks)
 
-const currentYear = computed(() => new Date().getFullYear())
+const currentYear = computed(() => {
+  if (typeof window !== 'undefined') {
+    return new Date().getFullYear()
+  }
+  return 2024
+})
 </script>
 
 <style scoped>
@@ -189,7 +194,7 @@ const currentYear = computed(() => new Date().getFullYear())
 }
 
 .footer-section ul li a:hover {
-  color: var(--primary-color) !important;
+  color: var(--primary-color, #0d6efd) !important;
   transition: color 0.3s ease;
 }
 
@@ -206,7 +211,7 @@ const currentYear = computed(() => new Date().getFullYear())
 }
 
 .social-links a:hover {
-  background: var(--primary-color);
+  background: var(--primary-color, #0d6efd);
   transform: translateY(-2px);
 }
 
@@ -221,7 +226,7 @@ const currentYear = computed(() => new Date().getFullYear())
 }
 
 .contact-item a:hover {
-  color: var(--primary-color) !important;
+  color: var(--primary-color, #0d6efd) !important;
 }
 
 hr {

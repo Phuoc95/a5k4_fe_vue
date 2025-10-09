@@ -204,18 +204,20 @@ const handleNewMessage = () => {
 
 onMounted(() => {
   // Simulate incoming message after 10 seconds
-  setTimeout(() => {
-    if (!isOpen.value) {
-      const welcomeMessage: ChatMessage = {
-        id: messageId++,
-        text: 'Bạn có cần tư vấn về dịch vụ cưới hỏi không?',
-        isUser: false,
-        timestamp: new Date()
+  if (typeof window !== 'undefined') {
+    setTimeout(() => {
+      if (!isOpen.value) {
+        const welcomeMessage: ChatMessage = {
+          id: messageId++,
+          text: 'Bạn có cần tư vấn về dịch vụ cưới hỏi không?',
+          isUser: false,
+          timestamp: new Date()
+        }
+        messages.value.push(welcomeMessage)
+        handleNewMessage()
       }
-      messages.value.push(welcomeMessage)
-      handleNewMessage()
-    }
-  }, 10000)
+    }, 10000)
+  }
 })
 </script>
 

@@ -114,7 +114,7 @@ const getDefaultServices = (): FeaturedService[] => [
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  background: linear-gradient(90deg, var(--primary-color, #0d6efd), var(--accent-color, #fd7e14));
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -131,7 +131,7 @@ const getDefaultServices = (): FeaturedService[] => [
 .service-icon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  background: linear-gradient(135deg, var(--primary-color, #0d6efd), var(--accent-color, #fd7e14));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -158,7 +158,7 @@ const getDefaultServices = (): FeaturedService[] => [
 }
 
 .service-card:hover .service-title {
-  color: var(--primary-color);
+  color: var(--primary-color, #0d6efd);
 }
 
 .service-description {
@@ -169,7 +169,7 @@ const getDefaultServices = (): FeaturedService[] => [
 }
 
 .service-link {
-  color: var(--primary-color);
+  color: var(--primary-color, #0d6efd);
   text-decoration: none;
   font-weight: 500;
   font-size: 0.9rem;
@@ -179,7 +179,7 @@ const getDefaultServices = (): FeaturedService[] => [
 }
 
 .service-link:hover {
-  color: var(--accent-color);
+  color: var(--accent-color, #fd7e14);
   transform: translateX(5px);
 }
 

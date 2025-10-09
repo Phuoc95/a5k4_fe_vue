@@ -11,16 +11,22 @@ import AppLayout from '@/components/layout/AppLayout.vue'
 <style>
 /* Global app styles */
 #app {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  min-height: 100vh;
 }
 
-main {
-  margin-top: 76px; /* Header height */
+/* Reset body margins */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
+  width: 100%;
 }
 
 /* Custom scrollbar */
@@ -33,11 +39,11 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e74c3c;
+  background: var(--primary-color, #0d6efd);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c0392b;
+  background: var(--accent-color, #fd7e14);
 }
 </style>

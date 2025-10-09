@@ -1,7 +1,7 @@
 <template>
   <header class="bg-white shadow-sm">
     <!-- Top Bar -->
-    <div class="top-bar py-2 d-none d-lg-block" :style="{ backgroundColor: theme.primaryColor }">
+    <div class="top-bar py-2 d-none d-lg-block">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <div class="text-white">
@@ -124,7 +124,6 @@
             <a
               :href="`tel:${contactInfo.phone.replace(/[^0-9+]/g, '')}`"
               class="btn btn-primary rounded-pill px-4"
-              :style="{ backgroundColor: theme.primaryColor, borderColor: theme.primaryColor }"
             >
               <i class="fas fa-phone-alt me-2"></i> Gọi ngay
             </a>
@@ -159,6 +158,10 @@ const closeMobileMenu = () => {
 </script>
 
 <style scoped>
+.top-bar {
+  background-color: var(--primary-color, #0d6efd);
+}
+
 .navbar-brand img {
   border-radius: 4px;
 }
@@ -169,11 +172,11 @@ const closeMobileMenu = () => {
 }
 
 .nav-link:hover {
-  color: #e74c3c !important;
+  color: var(--primary-color, #0d6efd) !important;
 }
 
 .nav-link.active {
-  color: #e74c3c !important;
+  color: var(--primary-color, #0d6efd) !important;
   font-weight: 600;
 }
 </style>

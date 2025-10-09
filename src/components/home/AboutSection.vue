@@ -95,7 +95,7 @@ onMounted(async () => {
   left: 0;
   width: 60px;
   height: 3px;
-  background: var(--primary-color);
+  background: var(--primary-color, #0d6efd);
 }
 
 .about-content .lead {

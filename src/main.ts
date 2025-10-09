@@ -1,4 +1,5 @@
 import './assets/main.css'
+import './assets/override.css'
 
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css'

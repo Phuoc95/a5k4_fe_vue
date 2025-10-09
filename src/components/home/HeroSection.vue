@@ -1,20 +1,14 @@
 <template>
   <section class="hero-section">
-    <div
-      id="carouselExampleCaptions"
-      class="carousel slide"
-      data-bs-ride="carousel"
-    >
+    <div class="hero-carousel">
       <!-- Carousel Indicators -->
       <div class="carousel-indicators">
         <button
           v-for="(slide, index) in slides"
           :key="index"
           type="button"
-          :data-bs-target="`#carouselExampleCaptions`"
-          :data-bs-slide-to="index"
-          :class="{ active: index === 0 }"
-          :aria-current="index === 0 ? 'true' : undefined"
+          :class="{ active: currentSlide === index }"
+          @click="goToSlide(index)"
           :aria-label="`Slide ${index + 1}`"
         ></button>
       </div>
@@ -25,7 +19,7 @@
           v-for="(slide, index) in slides"
           :key="slide.id"
           class="carousel-item"
-          :class="{ active: index === 0 }"
+          :class="{ active: currentSlide === index }"
         >
           <img
             :src="slide.imagePath"
@@ -50,8 +44,7 @@
       <button
         class="carousel-control-prev"
         type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="prev"
+        @click="previousSlide"
         style="top: 50% !important; transform: translateY(-50%);"
       >
         <i class="fas fa-arrow-left fa-2x"></i>
@@ -60,8 +53,7 @@
       <button
         class="carousel-control-next"
         type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="next"
+        @click="nextSlide"
         style="top: 50% !important; transform: translateY(-50%);"
       >
         <i class="fas fa-arrow-right fa-2x"></i>
@@ -72,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useHomeStore } from '@/stores/home'
 
 interface Slide {
@@ -87,11 +79,20 @@ const homeStore = useHomeStore()
 
 // Get slides from store or use default
 const slides = ref<Slide[]>([])
+const currentSlide = ref(0)
+let autoSlideInterval: NodeJS.Timeout | null = null
 
 onMounted(async () => {
   // Load slides from store
   await homeStore.loadSlides()
   slides.value = homeStore.slides.length > 0 ? homeStore.slides : getDefaultSlides()
+  
+  // Start auto slide
+  startAutoSlide()
+})
+
+onUnmounted(() => {
+  stopAutoSlide()
 })
 
 const getDefaultSlides = (): Slide[] => [
@@ -114,6 +115,39 @@ const getDefaultSlides = (): Slide[] => [
     imagePath: '/images/slides/slide_3.jpg'
   }
 ]
+
+const goToSlide = (index: number) => {
+  currentSlide.value = index
+  stopAutoSlide()
+  startAutoSlide()
+}
+
+const nextSlide = () => {
+  currentSlide.value = (currentSlide.value + 1) % slides.value.length
+  stopAutoSlide()
+  startAutoSlide()
+}
+
+const previousSlide = () => {
+  currentSlide.value = currentSlide.value === 0 ? slides.value.length - 1 : currentSlide.value - 1
+  stopAutoSlide()
+  startAutoSlide()
+}
+
+const startAutoSlide = () => {
+  if (typeof window !== 'undefined') {
+    autoSlideInterval = setInterval(() => {
+      currentSlide.value = (currentSlide.value + 1) % slides.value.length
+    }, 5000) // Change slide every 5 seconds
+  }
+}
+
+const stopAutoSlide = () => {
+  if (autoSlideInterval) {
+    clearInterval(autoSlideInterval)
+    autoSlideInterval = null
+  }
+}
 </script>
 
 <style scoped>
@@ -121,8 +155,23 @@ const getDefaultSlides = (): Slide[] => [
   position: relative;
 }
 
+.hero-carousel {
+  position: relative;
+}
+
+.carousel-inner {
+  position: relative;
+  overflow: hidden;
+}
+
 .carousel-item {
   position: relative;
+  display: none;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.carousel-item.active {
+  display: block;
 }
 
 .carousel-item::before {
@@ -149,6 +198,7 @@ const getDefaultSlides = (): Slide[] => [
 
 .carousel-control-prev,
 .carousel-control-next {
+  position: absolute;
   width: 60px;
   height: 60px;
   background: rgba(0, 0, 0, 0.5);
@@ -158,6 +208,7 @@ const getDefaultSlides = (): Slide[] => [
   font-size: 1.5rem;
   transition: all 0.3s ease;
   z-index: 3;
+  cursor: pointer;
 }
 
 .carousel-control-prev:hover,
@@ -175,8 +226,13 @@ const getDefaultSlides = (): Slide[] => [
 }
 
 .carousel-indicators {
+  position: absolute;
   bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 3;
+  display: flex;
+  gap: 10px;
 }
 
 .carousel-indicators button {
@@ -185,8 +241,8 @@ const getDefaultSlides = (): Slide[] => [
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
   border: none;
-  margin: 0 5px;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .carousel-indicators button.active {

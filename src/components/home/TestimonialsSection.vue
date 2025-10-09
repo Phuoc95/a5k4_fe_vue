@@ -127,7 +127,7 @@ const getDefaultTestimonials = (): Testimonial[] => [
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  background: linear-gradient(90deg, var(--primary-color, #0d6efd), var(--accent-color, #fd7e14));
 }
 
 .testimonial-card:hover {
@@ -141,7 +141,7 @@ const getDefaultTestimonials = (): Testimonial[] => [
 }
 
 .quote-icon {
-  color: var(--primary-color);
+  color: var(--primary-color, #0d6efd);
   font-size: 2rem;
   margin-bottom: 1rem;
   opacity: 0.3;
@@ -167,7 +167,7 @@ const getDefaultTestimonials = (): Testimonial[] => [
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  border: 3px solid var(--primary-color);
+  border: 3px solid var(--primary-color, #0d6efd);
 }
 
 .author-avatar img {
