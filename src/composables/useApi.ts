@@ -14,7 +14,7 @@ export const useApi = () => {
     return response.data
   }
 
-  const post = async (endpoint: string, data: any) => {
+  const post = async (endpoint: string, data: unknown) => {
     const response = await instance.post(endpoint, data)
     return response.data
   }
