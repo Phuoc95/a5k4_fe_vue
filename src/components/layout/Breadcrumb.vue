@@ -36,29 +36,29 @@ const route = useRoute()
 
 const breadcrumbs = computed((): BreadcrumbItem[] => {
   const breadcrumbs: BreadcrumbItem[] = []
-  
+
   // Get route meta for breadcrumb information
   const routeMeta = route.meta?.breadcrumb as BreadcrumbItem[] | undefined
-  
+
   if (routeMeta) {
     return routeMeta
   }
-  
+
   // Generate breadcrumbs based on route path
   const pathSegments = route.path.split('/').filter(segment => segment)
-  
+
   let currentPath = ''
-  
+
   for (let i = 0; i < pathSegments.length; i++) {
     currentPath += `/${pathSegments[i]}`
-    
+
     const label = getBreadcrumbLabel(pathSegments[i], currentPath)
     breadcrumbs.push({
       label,
       path: currentPath
     })
   }
-  
+
   return breadcrumbs
 })
 
@@ -70,17 +70,17 @@ const getBreadcrumbLabel = (segment: string, fullPath: string): string => {
     'contact': 'Liên Hệ',
     'about': 'Giới Thiệu'
   }
-  
+
   // Check if it's a service detail page
   if (fullPath.startsWith('/services/') && segment !== 'services') {
     return `Dịch Vụ #${segment}`
   }
-  
+
   // Check if it's a gallery detail page
   if (fullPath.startsWith('/gallery/') && segment !== 'gallery') {
     return `Thư Viện #${segment}`
   }
-  
+
   // Return mapped label or capitalize segment
   return labelMap[segment] || segment.charAt(0).toUpperCase() + segment.slice(1)
 }

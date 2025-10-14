@@ -1,20 +1,28 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { 
-  ContactForm, 
-  ContactInfo, 
-  FormState,
-  FormFieldError
+import type {
+    ContactForm,
+    ContactInfo,
+    FormState,
+    FormFieldError,
+    ContactInfoResponse,
 } from '@/types/contact'
+import { useApi } from '@/composables/useApi.ts'
 
 export const useContactStore = defineStore('contact', () => {
   // State
   const contactInfo = ref<ContactInfo>({
-    phone: '+84 123 456 789',
-    email: 'info@dichvucuoihoidep.com',
-    address: '123 Đường ABC, Quận 1, TP.HCM',
-    workingHours: 'Thứ 2 - Thứ 6: 8:00 - 18:00',
-    mapEmbed: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6324416472356!2d106.67935761526035!3d10.76290689233084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed009%3A0x1e6c81d2b5d9f3e1!2sExample%20Location!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+    // phone: '+84 123 456 789',
+    // email: 'info@dichvucuoihoidep.com',
+    // address: '123 Đường ABC, Quận 1, TP.HCM',
+    // workingHours: 'Thứ 2 - Thứ 6: 8:00 - 18:00',
+    // mapEmbed: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6324416472356!2d106.67935761526035!3d10.76290689233084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed009%3A0x1e6c81d2b5d9f3e1!2sExample%20Location!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
+
+      phone: 'phone',
+      email: 'info@email.com',
+      address: '123 Đường ABC, Quận 1, TP.HCM',
+      workingHours: 'Thứ 2 - Thứ 6: 8:00 - 18:00',
+      mapEmbed: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.6324416472356!2d106.67935761526035!3d10.76290689233084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed009%3A0x1e6c81d2b5d9f3e1!2sExample%20Location!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'
   })
 
   const formState = ref<FormState>({
@@ -55,11 +63,12 @@ export const useContactStore = defineStore('contact', () => {
     try {
       loading.value = true
       error.value = null
-      
+
       // TODO: Replace with actual API call
       // const response = await useApi().get<ContactInfoResponse>('/api/contact')
-      // contactInfo.value = response.data.data
-      
+      const response = await useApi().get('/api/contact')
+      contactInfo.value = response.data.data
+
       // For now, use default data from theme store
       console.log('Contact info loaded')
     } catch (err) {
@@ -132,14 +141,14 @@ export const useContactStore = defineStore('contact', () => {
 
       // TODO: Replace with actual API call
       // const response = await useApi().post<ContactSubmissionResponse>('/api/contact/submit', form)
-      
+
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000))
-      
+
       // Mock successful response
       formState.value.isSubmitted = true
       formState.value.successMessage = 'Cảm ơn bạn đã liên hệ với chúng tôi! Chúng tôi sẽ phản hồi lại sớm nhất có thể.'
-      
+
       return true
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Đã xảy ra lỗi khi gửi tin nhắn. Vui lòng thử lại sau.'
@@ -172,11 +181,11 @@ export const useContactStore = defineStore('contact', () => {
     error,
     availableServices,
     validationRules,
-    
+
     // Computed
     hasErrors,
     isFormValid,
-    
+
     // Actions
     loadContactInfo,
     validateForm,

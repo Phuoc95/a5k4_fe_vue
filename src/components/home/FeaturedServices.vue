@@ -7,7 +7,7 @@
           <p class="lead text-muted">Chúng tôi cung cấp đa dạng các dịch vụ tổ chức event chuyên nghiệp</p>
         </div>
       </div>
-      
+
       <div class="row g-4">
         <div
           v-for="service in featuredServices"
@@ -53,8 +53,8 @@ const featuredServices = ref<FeaturedService[]>([])
 onMounted(async () => {
   // Load featured services from store
   await homeStore.loadFeaturedServices()
-  featuredServices.value = homeStore.featuredServices.length > 0 
-    ? homeStore.featuredServices 
+  featuredServices.value = homeStore.featuredServices.length > 0
+    ? homeStore.featuredServices
     : getDefaultServices()
 })
 
@@ -218,16 +218,16 @@ const getDefaultServices = (): FeaturedService[] => [
     padding: 2rem 1.5rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .service-icon {
     width: 70px;
     height: 70px;
   }
-  
+
   .service-icon i {
     font-size: 1.8rem;
   }
-  
+
   .service-title {
     font-size: 1.2rem;
   }
@@ -237,20 +237,20 @@ const getDefaultServices = (): FeaturedService[] => [
   .service-card {
     padding: 1.5rem 1rem;
   }
-  
+
   .service-icon {
     width: 60px;
     height: 60px;
   }
-  
+
   .service-icon i {
     font-size: 1.5rem;
   }
-  
+
   .service-title {
     font-size: 1.1rem;
   }
-  
+
   .service-description {
     font-size: 0.9rem;
   }

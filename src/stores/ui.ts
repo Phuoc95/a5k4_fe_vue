@@ -40,16 +40,16 @@ export const useUIStore = defineStore('ui', () => {
       duration: 5000,
       ...notification
     }
-    
+
     notifications.value.push(newNotification)
-    
+
     // Auto remove after duration
     if (newNotification.duration) {
       setTimeout(() => {
         removeNotification(id)
       }, newNotification.duration)
     }
-    
+
     return id
   }
 
@@ -69,7 +69,7 @@ export const useUIStore = defineStore('ui', () => {
     isMobileMenuOpen,
     isLoading,
     notifications,
-    
+
     // Actions
     toggleMobileMenu,
     closeMobileMenu,

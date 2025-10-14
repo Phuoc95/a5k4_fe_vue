@@ -27,14 +27,14 @@
             <ContactInfoSection />
           </div>
           <div class="col-lg-6">
-            <ContactForm />
+<!--            <ContactForm />-->
           </div>
         </div>
       </div>
     </section>
 
     <!-- Map Section -->
-    <MapSection />
+<!--    <MapSection />-->
   </div>
 </template>
 
@@ -185,15 +185,15 @@ onMounted(() => {
   .page-header {
     padding: 3rem 0 2rem;
   }
-  
+
   .page-title {
     font-size: 2.5rem;
   }
-  
+
   .contact-section {
     padding: 3rem 0;
   }
-  
+
   .breadcrumb {
     padding: 0.5rem 0.75rem;
     font-size: 0.9rem;
@@ -204,21 +204,21 @@ onMounted(() => {
   .page-header {
     padding: 2.5rem 0 1.5rem;
   }
-  
+
   .page-title {
     font-size: 2rem;
   }
-  
+
   .contact-section {
     padding: 2rem 0;
   }
-  
+
   .breadcrumb {
     flex-direction: column;
     text-align: center;
     gap: 0.25rem;
   }
-  
+
   .breadcrumb-item + .breadcrumb-item::before {
     display: none;
   }

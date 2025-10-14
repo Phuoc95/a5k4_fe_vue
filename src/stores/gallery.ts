@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { useApi } from '@/composables/useApi'
+// import { useApi } from '@/composables/useApi' // TODO: Uncomment when implementing real API calls
 import type { GalleryItem, GalleryFilter } from '@/types/gallery'
 import { GalleryCategory } from '@/types/gallery'
 
@@ -36,7 +36,7 @@ export const useGalleryStore = defineStore('gallery', () => {
   })
 
   // Actions
-  const { get } = useApi()
+  // const { get } = useApi() // TODO: Uncomment when implementing real API calls
 
   const fetchGalleries = async (filter?: Partial<GalleryFilter>) => {
     loading.value = true
