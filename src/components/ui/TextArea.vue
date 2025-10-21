@@ -2,7 +2,7 @@
   <textarea
     :id="id"
     :name="name"
-    :value="modelValue"
+    :modelValue="modelValue"
     :placeholder="placeholder"
     :required="required"
     :disabled="disabled"

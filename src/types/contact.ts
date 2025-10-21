@@ -42,7 +42,8 @@ export interface ContactSubmissionResponse {
 }
 
 export interface ContactInfoResponse {
-  success: boolean
+  status: number
+  message: string
   data: ContactInfo
 }
 

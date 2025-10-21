@@ -54,7 +54,7 @@ export const useHomeStore = defineStore('home', () => {
       // TODO: Replace with actual API call
       // const response = await api.get('/api/slides')
       // slides.value = response.data
-      
+
       // For now, use default data
       slides.value = [
         {
@@ -90,7 +90,7 @@ export const useHomeStore = defineStore('home', () => {
       featuredServices.value = [
         {
           id: 1,
-          title: 'Tổ Chức Trọn Gói',
+          title: 'Tổ Chức Trọn Gói1',
           description: 'Từ A đến Z, chúng tôi lo tất cả',
           iconClass: 'fas fa-concierge-bell',
           link: '/services#organize'
@@ -196,7 +196,7 @@ export const useHomeStore = defineStore('home', () => {
     try {
       loading.value = true
       error.value = null
-      
+
       // Load all home data in parallel
       await Promise.all([
         loadSlides(),
@@ -220,7 +220,7 @@ export const useHomeStore = defineStore('home', () => {
     aboutData,
     loading,
     error,
-    
+
     // Actions
     loadSlides,
     loadFeaturedServices,
