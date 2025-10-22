@@ -4,10 +4,13 @@
       {{ label }}
       <span v-if="required" class="text-danger">*</span>
     </label>
+
     <slot />
+
     <div v-if="hasError" class="form-error">
       {{ errorMessage }}
     </div>
+
     <div v-if="helpText && !hasError" class="form-help">
       {{ helpText }}
     </div>

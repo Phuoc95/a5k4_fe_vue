@@ -18,22 +18,13 @@
                 {{ generalErrorMessage }}
             </div>
 
-            <form @submit.prevent="handleSubmit" class="contact-form" @click="() => console.log('Form clicked!')">
-                <!-- Debug: Check if form is rendering -->
-                <div style="background: red; color: white; padding: 5px; margin: 5px;" @click="() => console.log('Red div clicked!')">
-                    DEBUG: Form is rendering - can you see this?
-                </div>
-
+            <form @submit.prevent="handleSubmit" class="contact-form">
                 <FormField
                     id="name"
                     label="Họ và Tên"
                     :required="true"
                     :error-message="getFieldError('name')"
                 >
-                    <!-- Debug: Check if input is rendering -->
-                    <div style="background: yellow; color: black; padding: 2px; margin: 2px;">
-                        DEBUG: Input container rendering
-                    </div>
                     <TextInput
                         id="name"
                         name="name"
@@ -42,8 +33,6 @@
                         :required="true"
                         :variant="getFieldError('name') ? 'error' : 'default'"
                         @blur="validateField('name')"
-                        @focus="() => console.log('Name field focused - v-model value:', form.name)"
-                        @click="() => console.log('Name field clicked!')"
                     />
                 </FormField>
 
@@ -233,15 +222,13 @@ const handleSubmit = async () => {
 
 // Initialize
 onMounted(() => {
-  console.log('ContactForm mounted')
-  contactStore.loadContactInfo()
-  console.log('ContactForm loaded contact info')
+    contactStore.loadContactInfo()
 })
 </script>
 
 <style scoped>
 .contact-form-section {
-  height: 100%;
+    height: 100%;
 }
 
 .contact-form-card {

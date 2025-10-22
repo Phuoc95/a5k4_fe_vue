@@ -3,7 +3,7 @@
     :id="id"
     :type="type"
     :name="name"
-    :modelValue="modelValue"
+    :value="modelValue"
     :placeholder="placeholder"
     :required="required"
     :disabled="disabled"
@@ -12,12 +12,11 @@
     @input="handleInput"
     @blur="handleBlur"
     @focus="handleFocus"
-    @click="handleClick"
   />
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 
 interface Props {
   id?: string
@@ -46,11 +45,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<Emits>()
 
-// Debug logging
-onMounted(() => {
-  console.log('TextInput mounted:', props.id, 'modelValue:', props.modelValue)
-})
-
 const inputClasses = computed(() => [
   'form-control',
   `form-control-${props.size}`,
@@ -60,23 +54,16 @@ const inputClasses = computed(() => [
 ])
 
 const handleInput = (event: Event) => {
-  console.log('TextInput input event:', props.id)
   const target = event.target as HTMLInputElement
   emit('update:modelValue', target.value)
 }
 
 const handleBlur = () => {
-  console.log('TextInput blur event:', props.id)
   emit('blur')
 }
 
 const handleFocus = () => {
-  console.log('TextInput focus event:', props.id)
   emit('focus')
-}
-
-const handleClick = () => {
-  console.log('TextInput click event:', props.id)
 }
 </script>
 

@@ -2,7 +2,7 @@
   <select
     :id="id"
     :name="name"
-    :modelValue="modelValue"
+    :value="modelValue"
     :required="required"
     :disabled="disabled"
     :class="inputClasses"

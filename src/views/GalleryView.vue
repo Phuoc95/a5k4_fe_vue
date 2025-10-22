@@ -96,9 +96,9 @@ const handleRetry = async () => {
 
 const loadMore = async () => {
   const nextPage = galleryStore.currentPage + 1
-  await galleryStore.fetchGalleries({ 
+  await galleryStore.fetchGalleries({
     per_page: galleryStore.currentFilter.per_page,
-    page: nextPage 
+    page: nextPage
   })
 }
 

@@ -86,6 +86,8 @@ import ServiceSearch from '@/components/services/ServiceSearch.vue'
 import ServiceCategory from '@/components/services/ServiceCategory.vue'
 import ServiceContactForm from '@/components/services/ServiceContactForm.vue'
 import type { Service } from '@/types/service'
+import TextInput from '@/components/ui/TextInput.vue'
+import FormField from '@/components/ui/FormField.vue'
 
 const servicesStore = useServicesStore()
 
