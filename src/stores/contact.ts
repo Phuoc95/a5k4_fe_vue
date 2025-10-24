@@ -45,7 +45,7 @@ export const useContactStore = defineStore('contact', () => {
     email: { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, maxLength: 255 },
     phone: { pattern: /^[0-9\-\+\(\)\s]+$/, maxLength: 20 },
     subject: { required: true, maxLength: 255 },
-    message: { required: true, minLength: 10, maxLength: 2000 }
+    message: { required: true, minLength: 5, maxLength: 2000 }
   }
 
   // Computed

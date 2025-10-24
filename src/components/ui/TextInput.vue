@@ -38,6 +38,7 @@ interface Emits {
 }
 
 const props = withDefaults(defineProps<Props>(), {
+// const props = withDefaults(defineProps(), {
   type: 'text',
   size: 'md',
   variant: 'default'

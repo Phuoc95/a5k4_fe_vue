@@ -34,7 +34,7 @@
     </section>
 
     <!-- Map Section -->
-<!--    <MapSection />-->
+    <MapSection />
   </div>
 </template>
 
